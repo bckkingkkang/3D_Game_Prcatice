@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,34 +13,41 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        // ¸¶¿ì½º ÁÂÅ¬¸¯ µÇ¾úÀ» °æ¿ì
-        if (Input.GetMouseButtonDown(0)) // 0 Àº ÁÂÅ¬¸¯, 1Àº ¿ìÅ¬¸¯
+        // ë§ˆìš°ìŠ¤ ì¢Œí´ë¦­ ë˜ì—ˆì„ ê²½ìš°
+        if (Input.GetMouseButtonDown(0)) // 0 ì€ ì¢Œí´ë¦­, 1ì€ ìš°í´ë¦­
         {
-            // ½ÃÀÛ À§Ä¡ ÀúÀå
+            // ì‹œì‘ ìœ„ì¹˜ ì €ì¥
             StartPosition = Input.mousePosition;
         }
 
-        // ¸¶¿ì½º ÁÂÅ¬¸¯ ´­·ÁÀÖ´Â µ¿¾È
+        // ë§ˆìš°ìŠ¤ ì¢Œí´ë¦­ ëˆŒë ¤ìˆëŠ” ë™ì•ˆ
         if (Input.GetMouseButton(0))
         {
-            // ¸¶Áö¸· À§Ä¡ ÀúÀå
+            // ë§ˆì§€ë§‰ ìœ„ì¹˜ ì €ì¥
             EndPosition = Input.mousePosition;
 
             Vector3 Distance = EndPosition - StartPosition;
 
-            // Sign : °ªÀÌ À½¼ö¶ó¸é -1, ¾ç¼ö¶ó¸é +1 Ãâ·Â
+            // Sign : ê°’ì´ ìŒìˆ˜ë¼ë©´ -1, ì–‘ìˆ˜ë¼ë©´ +1 ì¶œë ¥
             int value = (int)Mathf.Sign(Distance.x);
 
-            if (value == 1)
+            // 0.5f ì´ìƒì˜ ë“œë˜ê·¸ ê±°ë¦¬ê°€ ìˆì–´ì•¼ ì›€ì§ì´ë„ë¡ ifë¬¸ ì¶”ê°€
+            if (Vector3.Distance(StartPosition, EndPosition) >= 0.5f)
             {
-                // ¿À¸¥ÂÊÀ¸·Î µå·¡±× ½Ã ¾ç¼ö, +1 Ãâ·Â
-                transform.Translate(Vector3.right * speed * Time.deltaTime);
+                if (value == 1)
+                {
+                    StartPosition = new Vector3(EndPosition.x - 1.0f, StartPosition.y, StartPosition.z);
+
+                    // ì˜¤ë¥¸ìª½ìœ¼ë¡œ ë“œë˜ê·¸ ì‹œ ì–‘ìˆ˜, +1 ì¶œë ¥
+                    transform.Translate(Vector3.right * speed * Time.deltaTime);
+                }
+                else if (value == -1)
+                {
+                    // ì™¼ìª½ìœ¼ë¡œ ë“œë˜ê·¸ ì‹œ ìŒìˆ˜, -1 ì¶œë ¥
+                    transform.Translate(Vector3.left * speed * Time.deltaTime);
+                }
             }
-            else if (value == -1)
-            {
-                // ¿ŞÂÊÀ¸·Î µå·¡±× ½Ã À½¼ö, -1 Ãâ·Â
-                transform.Translate(Vector3.left * speed * Time.deltaTime);
-            }
+            
         }
         if(Input.GetMouseButtonUp(0))
         {
