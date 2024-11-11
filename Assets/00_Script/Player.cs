@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
                 }
                 else if (value == -1)
                 {
+                    StartPosition = new Vector3(EndPosition.x + 1.0f, StartPosition.y, StartPosition.z);
+
                     // 왼쪽으로 드래그 시 음수, -1 출력
                     transform.Translate(Vector3.left * speed * Time.deltaTime);
                 }
