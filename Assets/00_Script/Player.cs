@@ -11,6 +11,14 @@ public class Player : MonoBehaviour
 
     public float speed;
 
+    // 벽에 부딪혔을 때 튕겨져나오는 현상 해결
+    Rigidbody rigidbody;
+
+    private void Start()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+    }
+
     private void Update()
     {
         // 마우스 좌클릭 되었을 경우
@@ -38,15 +46,19 @@ public class Player : MonoBehaviour
                 {
                     StartPosition = new Vector3(EndPosition.x - 1.0f, StartPosition.y, StartPosition.z);
 
+                    rigidbody.velocity = new Vector3(speed, rigidbody.velocity.y, rigidbody.velocity.z);
+
                     // 오른쪽으로 드래그 시 양수, +1 출력
-                    transform.Translate(Vector3.right * speed * Time.deltaTime);
+                    //transform.Translate(Vector3.right * speed * Time.deltaTime);
                 }
                 else if (value == -1)
                 {
                     StartPosition = new Vector3(EndPosition.x + 1.0f, StartPosition.y, StartPosition.z);
 
+                    rigidbody.velocity = new Vector3(-speed, rigidbody.velocity.y, rigidbody.velocity.z);
+
                     // 왼쪽으로 드래그 시 음수, -1 출력
-                    transform.Translate(Vector3.left * speed * Time.deltaTime);
+                    //transform.Translate(Vector3.left * speed * Time.deltaTime);
                 }
             }
             
