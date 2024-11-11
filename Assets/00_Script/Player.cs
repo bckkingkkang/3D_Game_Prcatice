@@ -67,6 +67,9 @@ public class Player : MonoBehaviour
         {
             StartPosition = Vector3.zero;
             EndPosition = Vector3.zero;
+
+            // 마우스를 뗐을 경우 미끄러지는 문제 해결
+            rigidbody.velocity = Vector3.zero;
         }
     }
 }
