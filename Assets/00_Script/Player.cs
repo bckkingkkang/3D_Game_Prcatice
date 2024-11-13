@@ -80,6 +80,11 @@ public class Player : MonoBehaviour
 
             AnimatorChange("AIM");
         }
+
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            anim.SetTrigger("SHOOT");
+        }
     }
 
     private void AnimatorChange(string temp)
