@@ -14,9 +14,12 @@ public class Player : MonoBehaviour
     // 벽에 부딪혔을 때 튕겨져나오는 현상 해결
     Rigidbody rigidbody;
 
+    Animator anim;
+
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -50,6 +53,8 @@ public class Player : MonoBehaviour
 
                     // 오른쪽으로 드래그 시 양수, +1 출력
                     //transform.Translate(Vector3.right * speed * Time.deltaTime);
+
+                    AnimatorChange("RUN");
                 }
                 else if (value == -1)
                 {
@@ -59,6 +64,8 @@ public class Player : MonoBehaviour
 
                     // 왼쪽으로 드래그 시 음수, -1 출력
                     //transform.Translate(Vector3.left * speed * Time.deltaTime);
+
+                    AnimatorChange("RUN");
                 }
             }
             
@@ -70,6 +77,15 @@ public class Player : MonoBehaviour
 
             // 마우스를 뗐을 경우 미끄러지는 문제 해결
             rigidbody.velocity = Vector3.zero;
+
+            AnimatorChange("AIM");
         }
+    }
+
+    private void AnimatorChange(string temp)
+    {
+        anim.SetBool("RUN", false);
+        anim.SetBool("AIM", false);
+        anim.SetBool(temp, true);
     }
 }
