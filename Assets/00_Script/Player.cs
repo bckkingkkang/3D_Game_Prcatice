@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     Vector3 StartPosition;
     Vector3 EndPosition;
 
-    public float speed;
+    private float speed = 3;
 
     // 벽에 부딪혔을 때 튕겨져나오는 현상 해결
     Rigidbody rigidbody;
