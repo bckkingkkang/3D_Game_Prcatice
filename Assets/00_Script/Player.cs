@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     Vector3 EndPosition;
 
     private float speed = 3;
+    private float bullet_speed = 0.5f;
 
     // 벽에 부딪혔을 때 튕겨져나오는 현상 해결
     Rigidbody rigidbody;
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+
+        StartCoroutine(Bullet_Coroutine());
     }
 
     private void Update()
@@ -83,11 +86,24 @@ public class Player : MonoBehaviour
             AnimatorChange("AIM");
         }
 
+        // A Key 입력 시 실행
+        /*
         if(Input.GetKeyDown(KeyCode.A))
         {
             anim.SetTrigger("SHOOT");
             Bullet_Make();
         }
+        */
+    }
+
+    // Coroutine
+    // A key 입력 시 실행 -> 1초마다 실행되도록 변경
+    private IEnumerator Bullet_Coroutine()
+    {
+        Bullet_Make();
+        yield return new WaitForSeconds(bullet_speed);
+        StartCoroutine(Bullet_Coroutine());
+
     }
 
     private void AnimatorChange(string temp)
@@ -99,6 +115,7 @@ public class Player : MonoBehaviour
 
     private void Bullet_Make()
     {
+        anim.SetTrigger("SHOOT");
         GameObject go = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z + 1.0f), Quaternion.identity);
         Destroy(go, 3.0f);
     }
