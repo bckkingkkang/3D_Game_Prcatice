@@ -108,6 +108,12 @@ public class Player : MonoBehaviour
 
     private void AnimatorChange(string temp)
     {
+        if (temp == "SHOOT")
+        {
+            anim.SetTrigger("SHOOT");
+            return;
+        }
+
         anim.SetBool("RUN", false);
         anim.SetBool("AIM", false);
         anim.SetBool(temp, true);
@@ -115,7 +121,8 @@ public class Player : MonoBehaviour
 
     private void Bullet_Make()
     {
-        anim.SetTrigger("SHOOT");
+        // anim.SetTrigger("SHOOT");
+        AnimatorChange("SHOOT");
         GameObject go = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z + 1.0f), Quaternion.identity);
         Destroy(go, 3.0f);
     }
