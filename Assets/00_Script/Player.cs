@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
 
     private void Bullet_Make()
     {
-        GameObject go = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.0f), Quaternion.identity);
+        GameObject go = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z + 1.0f), Quaternion.identity);
         Destroy(go, 3.0f);
     }
 }
