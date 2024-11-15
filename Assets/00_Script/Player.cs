@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 
     Animator anim;
 
+    public GameObject Bullet;
+
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -84,6 +86,7 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.A))
         {
             anim.SetTrigger("SHOOT");
+            Bullet_Make();
         }
     }
 
@@ -92,5 +95,11 @@ public class Player : MonoBehaviour
         anim.SetBool("RUN", false);
         anim.SetBool("AIM", false);
         anim.SetBool(temp, true);
+    }
+
+    private void Bullet_Make()
+    {
+        GameObject go = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.0f), Quaternion.identity);
+        Destroy(go, 3.0f);
     }
 }
