@@ -36,6 +36,10 @@ public class Monster : MonoBehaviour
                 if (HP <= 0)
                 {
                     anim.SetTrigger("Death");
+
+                    GetComponent<CapsuleCollider>().enabled = false;
+                    Destroy(GetComponent<Rigidbody>());
+
                     isDead = true;
                 }
                 Destroy(other.transform.parent.gameObject);
