@@ -31,13 +31,17 @@ public class Monster : MonoBehaviour
         {
             HP--;
 
-            if(HP <= 0)
+            if(isDead == false)
             {
-                anim.SetTrigger("Death");
-                isDead = true;
+                if (HP <= 0)
+                {
+                    anim.SetTrigger("Death");
+                    isDead = true;
+                }
+                Destroy(other.transform.parent.gameObject);
             }
 
-            Destroy(other.transform.parent.gameObject);
+
         }
     }
 }
