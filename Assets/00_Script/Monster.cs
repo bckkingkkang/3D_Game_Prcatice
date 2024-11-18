@@ -9,9 +9,20 @@ public class Monster : MonoBehaviour
 
     public int HP = 5;
 
+    Animator anim;
+    bool isDead = false;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     void Update()
     {
-        transform.position += transform.forward * Time.deltaTime * speed;
+        if(isDead == false)
+        {
+            transform.position += transform.forward * Time.deltaTime * speed;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,6 +30,13 @@ public class Monster : MonoBehaviour
         if(other.gameObject.tag == "Bullet")
         {
             HP--;
+
+            if(HP <= 0)
+            {
+                anim.SetTrigger("Death");
+                isDead = true;
+            }
+
             Destroy(other.transform.parent.gameObject);
         }
     }
