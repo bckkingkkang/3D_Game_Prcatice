@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
     private float speed = 2;
+
+    public Slider slider;
+    int MaxHP;
 
     public int HP = 5;
 
@@ -15,6 +19,7 @@ public class Monster : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
+        MaxHP = HP;
     }
 
     void Update()
@@ -31,6 +36,13 @@ public class Monster : MonoBehaviour
         {
             HP--;
 
+            if(slider.gameObject.activeSelf == false)
+            {
+                slider.gameObject.SetActive(true);
+            }
+
+            slider.value = (float)HP / (float)MaxHP;
+
             if(isDead == false)
             {
                 if (HP <= 0)
@@ -41,6 +53,7 @@ public class Monster : MonoBehaviour
                     Destroy(GetComponent<Rigidbody>());
 
                     isDead = true;
+                    slider.gameObject.SetActive(false);
                 }
                 Destroy(other.transform.parent.gameObject);
             }
