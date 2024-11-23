@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bullet
+  - ATK_Speed
+  - ATK_Count
   layers:
   - Default
   - TransparentFX
