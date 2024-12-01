@@ -40,6 +40,7 @@ public class Item : MonoBehaviour
         {
             Cubes[i].GetComponent<Renderer>().material = materials[(int)state[i]];
             texts[i].text = state[i].ToString();
+            Cubes[i].tag = state[i].ToString();
         }
 
     }
