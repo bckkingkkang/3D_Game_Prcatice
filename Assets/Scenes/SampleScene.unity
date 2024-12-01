@@ -1495,6 +1495,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 549771a1147245647a0f6362f9ba7ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cubes:
+  - {fileID: 649680591}
+  - {fileID: 630157786}
+  materials:
+  - {fileID: 2100000, guid: e8339e67e63c49340ab4dca686c9813c, type: 2}
+  - {fileID: 2100000, guid: e3773a9a17a4f0d4ca904916c0a147bb, type: 2}
 --- !u!4 &1269870063
 Transform:
   m_ObjectHideFlags: 0
