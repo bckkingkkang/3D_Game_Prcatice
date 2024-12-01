@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public enum Item_State
 {
@@ -17,6 +18,8 @@ public class Item : MonoBehaviour
     Item_State[] state = new Item_State[2];
 
     public Material[] materials;
+
+    public TextMeshPro[] texts;
 
     private void Start()
     {
@@ -36,6 +39,7 @@ public class Item : MonoBehaviour
         for(int i=0; i<state.Length; i++)
         {
             Cubes[i].GetComponent<Renderer>().material = materials[(int)state[i]];
+            texts[i].text = state[i].ToString();
         }
 
     }
