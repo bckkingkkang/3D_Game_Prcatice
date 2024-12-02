@@ -157,7 +157,7 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.tag == "ATK_Speed")
         {
-            Level_Speed();
+            Level_Speed(other.gameObject);
             bullet_speed -= 0.2f;
             if (bullet_speed <= 0.2f)
             {
@@ -166,7 +166,7 @@ public class Player : MonoBehaviour
         }
         else if (other.gameObject.tag == "ATK_Count")
         {
-            Level_Count();
+            Level_Count(other.gameObject);
             bullet_count++;
             if (bullet_count >= 4)
             {
@@ -194,12 +194,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Level_Speed()
+    private void Level_Speed(GameObject obj)
     {
+        Destroy(obj);
         LevelUp_Speed.Play();
     }
-    private void Level_Count()
+    private void Level_Count(GameObject obj)
     {
+        Destroy(obj);
         LevelUp_Count.Play();
     }
 }
