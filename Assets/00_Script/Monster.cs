@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -15,6 +15,8 @@ public class Monster : MonoBehaviour
 
     Animator anim;
     bool isDead = false;
+
+    public GameObject HitParticle;
 
     private void Start()
     {
@@ -35,6 +37,14 @@ public class Monster : MonoBehaviour
         if(other.gameObject.tag == "Bullet")
         {
             HP--;
+
+            /*
+                Instantiate
+                : 새로운 게임 오브젝트를 생성하는 함수로
+                이를 통해 기존 프리팹 또는 게임 오브젝트의 복사본을 만들 수 있다.
+                주로 캐릭터 스폰, 총알 발사, 환경 생성 등 동적으로 오브젝트를 생성할 때 사용된다. 
+            */
+            Instantiate(HitParticle, other.gameObject.transform.position, Quaternion.identity);
 
             if(slider.gameObject.activeSelf == false)
             {

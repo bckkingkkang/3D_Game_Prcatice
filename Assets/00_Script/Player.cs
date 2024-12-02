@@ -27,6 +27,10 @@ public class Player : MonoBehaviour
 
     public GameObject Bullet;
 
+    // 아이템과 충돌하는 경우 Level Up 효과 적용
+    public ParticleSystem LevelUp_Speed;
+    public ParticleSystem LevelUp_Count;
+
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -81,9 +85,9 @@ public class Player : MonoBehaviour
                     AnimatorChange("RUN");
                 }
             }
-            
+
         }
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             StartPosition = Vector3.zero;
             EndPosition = Vector3.zero;
@@ -146,13 +150,14 @@ public class Player : MonoBehaviour
             Destroy(go, 3.0f);
         }
 
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "ATK_Speed")
         {
+            Level_Speed(other.gameObject);
             bullet_speed -= 0.2f;
             if (bullet_speed <= 0.2f)
             {
@@ -161,8 +166,9 @@ public class Player : MonoBehaviour
         }
         else if (other.gameObject.tag == "ATK_Count")
         {
+            Level_Count(other.gameObject);
             bullet_count++;
-            if(bullet_count >= 4)
+            if (bullet_count >= 4)
             {
                 bullet_count = 4;
             }
@@ -171,7 +177,7 @@ public class Player : MonoBehaviour
 
     private float[] PositionX(int bullet_count)
     {
-        switch(bullet_count)
+        switch (bullet_count)
         {
             case 0:
                 return positionX_1;
@@ -186,5 +192,16 @@ public class Player : MonoBehaviour
             default:
                 return new float[0];
         }
+    }
+
+    private void Level_Speed(GameObject obj)
+    {
+        Destroy(obj);
+        LevelUp_Speed.Play();
+    }
+    private void Level_Count(GameObject obj)
+    {
+        Destroy(obj);
+        LevelUp_Count.Play();
     }
 }
