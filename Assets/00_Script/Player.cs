@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     Vector3 EndPosition;
 
     private float speed = 3;
-    private float bullet_speed = 0.5f;
+    private float bullet_speed = 1f;
 
     // 벽에 부딪혔을 때 튕겨져나오는 현상 해결
     Rigidbody rigidbody;
@@ -125,5 +125,17 @@ public class Player : MonoBehaviour
         AnimatorChange("SHOOT");
         GameObject go = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z + 1.0f), Quaternion.identity);
         Destroy(go, 3.0f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "ATK_Speed")
+        {
+            bullet_speed -= 0.2f;
+            if(bullet_speed <= 0.2f)
+            {
+                bullet_speed = 0.2f;
+            }
+        }
     }
 }
