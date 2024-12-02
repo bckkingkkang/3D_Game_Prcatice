@@ -1902,6 +1902,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 95721247080736149}
   HP: 5
+  HitParticle: {fileID: 8477940893449055955, guid: 226868fce03918f46933287e876296e5, type: 3}
 --- !u!136 &1661486649900656394
 CapsuleCollider:
   m_ObjectHideFlags: 0
