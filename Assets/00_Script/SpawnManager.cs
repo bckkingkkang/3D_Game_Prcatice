@@ -32,7 +32,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         Instantiate(monster, new Vector3(xPosition, 0.05f, zPosition), Quaternion.Euler(0f, 180f, 0f));
 
-        yield return new WaitForSeconds(Random.Range(1, 3));
+        yield return new WaitForSeconds(Random.Range(5f, 10f));
 
         StartCoroutine(Spawn_Coroutine());
     }
