@@ -12,6 +12,14 @@ public class Player : MonoBehaviour
     private float speed = 3;
     private float bullet_speed = 1f;
 
+    private int bullet_count = 0;
+
+    float[] positionX_1 = { 0.0f };
+    float[] positionX_2 = { -0.15f, 0.15f };
+    float[] positionX_3 = { -0.15f, 0.0f, 0.15f };
+    float[] positionX_4 = { -0.0f, -0.15f, 0.15f, 0.3f };
+    float[] positionX_5 = { -0.3f, -0.15f, 0.0f, 0.15f, 0.3f };
+
     // 벽에 부딪혔을 때 튕겨져나오는 현상 해결
     Rigidbody rigidbody;
 
@@ -119,23 +127,64 @@ public class Player : MonoBehaviour
         anim.SetBool(temp, true);
     }
 
+    /*
+        float[] positionX_1 = { 0.0f };
+        float[] positionX_2 = { -0.15f, 0.15f };
+        float[] positionX_3 = { -0.15f, 0.0f, 0.15f };
+        float[] positionX_4 = { -0.0f, -0.15f, 0.15f, 0.3f };
+        float[] positionX_5 = { -0.3f, -0.15f, 0.0f, 0.15f, 0.3f }; 
+    */
+
     private void Bullet_Make()
     {
         // anim.SetTrigger("SHOOT");
         AnimatorChange("SHOOT");
-        GameObject go = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z + 1.0f), Quaternion.identity);
-        Destroy(go, 3.0f);
+
+        for (int i = 0; i < PositionX(bullet_count).Length; i++)
+        {
+            GameObject go = Instantiate(Bullet, new Vector3(transform.position.x + PositionX(bullet_count)[i], transform.position.y + 1.5f, transform.position.z + 1.0f), Quaternion.identity);
+            Destroy(go, 3.0f);
+        }
+
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "ATK_Speed")
+        if (other.gameObject.tag == "ATK_Speed")
         {
             bullet_speed -= 0.2f;
-            if(bullet_speed <= 0.2f)
+            if (bullet_speed <= 0.2f)
             {
                 bullet_speed = 0.2f;
             }
+        }
+        else if (other.gameObject.tag == "ATK_Count")
+        {
+            bullet_count++;
+            if(bullet_count >= 4)
+            {
+                bullet_count = 4;
+            }
+        }
+    }
+
+    private float[] PositionX(int bullet_count)
+    {
+        switch(bullet_count)
+        {
+            case 0:
+                return positionX_1;
+            case 1:
+                return positionX_2;
+            case 2:
+                return positionX_3;
+            case 3:
+                return positionX_4;
+            case 4:
+                return positionX_5;
+            default:
+                return new float[0];
         }
     }
 }
